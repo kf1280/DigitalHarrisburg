@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Feature;
+use App\Collection;
+use App\Comment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +19,8 @@ class FeatureController extends Controller
      */
     public function index()
     {
-        //
+        $features = Feature::all();
+        return view('feature.index')->with('features', $features);
     }
 
     /**
@@ -26,7 +30,8 @@ class FeatureController extends Controller
      */
     public function create()
     {
-        //
+        $collections = Collection::all();
+        return view('feature.new')->with('collections', $collections);
     }
 
     /**
@@ -37,7 +42,27 @@ class FeatureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $feature = new Feature;
+        $feature->title = $request->input('title');
+        $feature->author = $request->input('author');
+        $feature->content = $request->input('content');
+      
+       if ($file = $request->hasFile('image')) {
+            
+            $file = $request->file('image') ;
+            
+            $fileName = $file->getClientOriginalName() ;
+            $fileName = time() . "_" . $fileName;
+            $destinationPath = public_path().'/images/' ;
+            $file->move($destinationPath, $fileName);
+            $feature->image = $fileName;
+        }
+
+        $feature->published = $request->input('published');
+        $feature->collection_id = $request->input('collection');
+        $feature->save();
+      
+        return redirect('/dashboard');
     }
 
     /**
@@ -48,7 +73,9 @@ class FeatureController extends Controller
      */
     public function show($id)
     {
-        //
+        $feature = Feature::find($id);
+      
+        return view('feature.show')->with('feature', $feature);
     }
 
     /**
@@ -59,7 +86,9 @@ class FeatureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feature = Feature::find($id);
+        $collections = Collection::all();
+        return view('feature.edit')->with('feature', $feature)->with('collections', $collections);
     }
 
     /**
@@ -71,7 +100,48 @@ class FeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $feature = Feature::find($id);
+        $feature->title = $request->input('title');
+        $feature->author = $request->input('author');
+        $feature->content = $request->input('content');
+      
+        if ($file = $request->hasFile('image')) {
+            
+            $file = $request->file('image') ;
+            
+            $fileName = $file->getClientOriginalName() ;
+            $fileName = time() . "_" . $fileName;
+            $destinationPath = public_path().'/images/' ;
+            $file->move($destinationPath, $fileName);
+            $feature->image = $fileName;
+        }
+      
+        $feature->published = $request->input('published');
+        $feature->collection_id = $request->input('collection');
+        $feature->save();
+      
+        return redirect('/dashboard');
+    }
+  
+    /**
+    * Toggle the visibility of a feature by publishing or unpublishing it
+    *
+    * @param int $id
+    * @return \Illuminate\Http\Response
+    */
+    public function publish($id)
+    {
+        $feature = Feature::find($id);
+
+        if ($feature->published === 'Yes') {
+          $feature->published = 'No';
+        } else {
+          $feature->published = 'Yes';
+        } 
+
+        $feature->save();
+
+        return back();
     }
 
     /**
@@ -82,6 +152,8 @@ class FeatureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $feature = Feature::find($id);
+        $feature->delete();
+        return redirect('/dashboard');
     }
 }

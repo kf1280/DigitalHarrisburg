@@ -1,13 +1,11 @@
 body {
   font-family: 'News Cycle';
-}
-
-.fa-btn {
-  margin-right: 6px;
+  padding: 0;
 }
 
 html, body {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -19,7 +17,7 @@ body {
   flex: 1 0 auto;
 }
 
-footer {
+.footer {
   flex-shrink: 0;
   background-color: #f8f9fa;
 }

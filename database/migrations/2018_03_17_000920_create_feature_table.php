@@ -15,8 +15,10 @@ class CreateFeatureTable extends Migration
         Schema::create('features', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('author');
             $table->text('content');
             $table->text('image');
+            $table->string('published');
             $table->timestamps();
             $table->integer('user_id');
             $table->integer('collection_id');

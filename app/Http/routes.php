@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -10,39 +9,28 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', function() {
-  return view('home');
+  return view('welcome');
 });
 
 Route::get('about', function() {
   return view('about');
 });
 
+Route::get('publish/{id}', [
+  'uses' => 'FeatureController@publish',
+  'as' => 'feature.publish'
+]);
+
 Route::resource('blog', 'BlogController');
 Route::resource('features', 'FeatureController');
 Route::resource('collections', 'CollectionController');
+Route::resource('comment', 'CommentController');
 Route::resource('maps', 'MapController');
+Route::resource('dashboard', 'DashboardController');
 
-// Route::get('blog', function () {
-//     return view('blog.index');
-// });
-
-// Route::get('collection', function () {
-//     return view('collection.index');
-// });
-
-// Route::get('dashboard', function () {
-//     return view('dashboard.index');
-// });
-
-// Route::get('feature', function () {
-//     return view('feature.index');
-// });
-
-// Route::get('map', function () {
-//     return view('map.index');
-// });
+Route::post('/maps/{id}/markers', 'MapController@storeMarker');
+Route::post('/maps/{id}/circles', 'MapController@storeCircle');
 
 /*
 |--------------------------------------------------------------------------
@@ -54,13 +42,10 @@ Route::resource('maps', 'MapController');
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
 Route::group(['middleware' => ['web']], function () {
     //
 });
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
     Route::get('/home', 'HomeController@index');
 });
