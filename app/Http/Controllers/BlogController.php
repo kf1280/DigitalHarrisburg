@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('updated_at', 'desc')->get();
         return view('blog.blogs')->with('blogs', $blogs);
     }
 
@@ -28,7 +28,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.new');
     }
 
     /**
@@ -39,7 +39,26 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $blog = new Blog;
+        $blog->title = $request->input('title');
+        $blog->author = $request->input('author');
+        $blog->content = $request->input('content');
+      
+       if ($file = $request->hasFile('image')) {
+            
+            $file = $request->file('image') ;
+            
+            $fileName = $file->getClientOriginalName() ;
+            $fileName = time() . "_" . $fileName;
+            $destinationPath = public_path().'/images/' ;
+            $file->move($destinationPath, $fileName);
+            $blog->image = $fileName;
+        }
+
+        $blog->published = $request->input('published');
+        $blog->save();
+      
+        return redirect('/dashboard');
     }
 
     /**
@@ -50,7 +69,9 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $blog = Blog::find($id);
+      
+        return view('blog.blog-page')->with('blog', $blog);
     }
 
     /**
@@ -61,7 +82,9 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $blog = Blog::find($id);
+        
+        return view('blog.edit')->with('blog', $blog);
     }
 
     /**
@@ -73,7 +96,26 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->title = $request->input('title');
+        $blog->author = $request->input('author');
+        $blog->content = $request->input('content');
+      
+       if ($file = $request->hasFile('image')) {
+            
+            $file = $request->file('image') ;
+            
+            $fileName = $file->getClientOriginalName() ;
+            $fileName = time() . "_" . $fileName;
+            $destinationPath = public_path().'/images/' ;
+            $file->move($destinationPath, $fileName);
+            $blog->image = $fileName;
+        }
+
+        $blog->published = $request->input('published');
+        $blog->save();
+      
+        return redirect('/dashboard');
     }
 
     /**
@@ -82,8 +124,26 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+  
+      public function reveal($id)
+    {
+        $blog = Blog::find($id);
+
+        if ($blog->published === "Yes") {
+          $blog->published = "No";
+        } else {
+          $blog->published = "Yes";
+        } 
+
+        $blog->save();
+
+        return back();
+    }
+
     public function destroy($id)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->delete();
+        return redirect('/dashboard');
     }
 }

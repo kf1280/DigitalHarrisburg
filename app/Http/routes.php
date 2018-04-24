@@ -22,6 +22,12 @@ Route::get('publish/{id}', [
   'as' => 'feature.publish'
 ]);
 
+Route::get('reveal/{id}', [
+  'uses' => 'BlogController@reveal',
+  'as' => 'blog.reveal'
+]);
+
+
 Route::resource('blog', 'BlogController');
 Route::resource('features', 'FeatureController');
 Route::resource('collections', 'CollectionController');

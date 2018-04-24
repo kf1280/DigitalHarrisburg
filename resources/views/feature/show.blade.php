@@ -33,8 +33,12 @@
     <div class="col-md-12">
       <h2 class="mt-4">Comments</h2>
       <hr>
+      @if ($feature->comments->count() === 0)  
+        <p class="lead text-center">There are no comments to display.</p>
+      @endif  
     </div>
       
+    
       @foreach($feature->comments as $comment)
       <div class="col-md-12 mb-2">
          <div class="card">
@@ -77,7 +81,7 @@
           <label for="content" class="lead">Write a Comment:</label>
           <textarea class="form-control" name="content" id="content"></textarea>
         </div>
-        <button type="submit" class="btn btn-light">Add Comment</button>
+        <button type="submit" class="btn btn-light btn-block">Add Comment</button>
       </form>
     </div>
 
@@ -129,7 +133,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form id="delete_comment_form" action="#" method="post">
           <input type="hidden" name="_method" value="DELETE">
-          <button type="button" class="btn btn-danger">Delete Comment</button>
+          <button type="submit" class="btn btn-danger">Delete Comment</button>
         </form>
       </div>
     </div>
