@@ -16,6 +16,7 @@ class CreateCollectionTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
+            $table->string('published');
             $table->timestamps();
             $table->integer('user_id');
         });

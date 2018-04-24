@@ -110,4 +110,21 @@ class CollectionController extends Controller
         $collection->delete();
         return redirect('/dashboard');
     }
+  
+  public function publish($id)
+    {
+        $collection = Collection::find($id);
+
+        if ($collection->published === 'Yes') {
+          $collection->published = 'No';
+        } else {
+          $collection->published = 'Yes';
+        } 
+
+        $collection->save();
+
+        return back();
+    }
+
+  
 }

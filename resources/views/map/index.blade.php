@@ -10,7 +10,8 @@
   </div>
   <div class="row">
     @foreach($maps as $map)
-      <div class="col-4">
+      @if($map->published === 'Yes')
+        <div class="col-4">
         <div class="card">
           <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a></div>
           <div class="card-img-top">
@@ -19,6 +20,7 @@
           <div class="card-body"></div>
         </div>
       </div>
+      @endif
     @endforeach
   </div>
 </div>

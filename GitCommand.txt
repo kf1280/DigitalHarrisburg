@@ -1,4 +1,4 @@
-git add app/Http/
+git add .
 git commit -m "ASDAS"
 git push
 git revert

@@ -28,12 +28,24 @@
   
   m = [];
   c = [];
-  p = [];
   
   @foreach($markers as $marker)
     @if($marker->type == 'Marker')
+      
+      options = {
+        icon: '{{$marker->icon}}',
+        iconShape: 'marker',
+        iconSize: [40, 40],
+        iconAnchor: [21, 20],
+        innerIconAnchor: [0, 8],
+        innerIconStyle: "padding: 1px; font-size: 20px;",
+        borderColor: '{{$marker->color}}',
+        textColor: '{{$marker->color}}',
+        backgroundColor: '{{$marker->color2}}'
+      };
+      
       var str = Math.random().toString(36).substring(0,5);
-      str = L.marker([{{$marker->latitude}}, {{$marker->longitude}}]).bindPopup('{{$marker->content}}');
+      str = L.marker([{{$marker->latitude}}, {{$marker->longitude}}], {icon: L.BeautifyIcon.icon(options), draggable: true}).bindPopup('<h5>{{$marker->title}}</h5><hr><p>{{$marker->content}}</p>');
       m.push(str);
     @elseif($marker->type == 'Circle')
       var str = Math.random().toString(36).substring(0,5);
@@ -42,24 +54,15 @@
     @endif
   @endforeach
   
-  @foreach($polygons as $polygon)
-    var str = Math.random().toString(36).substring(0,5);
-    str = L.polygon([
-      [{{$polygon->latitude}}, {{$polygon->longitude}}],
-    ]);
-    p.push(str);
-  @endforeach
-  
   
   
   var markers = L.layerGroup(m);
   var circles = L.layerGroup(c);
-  var polygons = L.layerGroup(p);
   
   var map = L.map('map', {
     center: [{{$map->latitude}}, {{$map->longitude}}],
     zoom: {{$map->zoom}},
-    layers: [@if($map->layer == 'streets-satellite') satellite @elseif($map->layer == 'high-contrast') contrast @else {{$map->layer}} @endif, markers, circles, polygons]
+    layers: [@if($map->layer == 'streets-satellite') satellite @elseif($map->layer == 'high-contrast') contrast @else {{$map->layer}} @endif, markers, circles]
   });
   
   var baseMaps = {
@@ -68,8 +71,7 @@
   
   var overlayMaps = {
     "Markers": markers,
-    "Circles": circles,
-    "Polygons": polygons
+    "Circles": circles
   };
   
   L.control.layers(baseMaps, overlayMaps).addTo(map);

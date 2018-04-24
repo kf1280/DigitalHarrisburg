@@ -7,7 +7,7 @@
              <div class="card">
               <div class="card-header text-center">Register a User</div>
               <div class="card-body">
-                    <form role="form" method="POST" action="{{ url('/register') }}">
+                    <form role="form" method="POST" action="/users">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

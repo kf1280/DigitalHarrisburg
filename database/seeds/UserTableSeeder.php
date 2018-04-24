@@ -14,14 +14,14 @@ class UserTableSeeder extends Seeder
         $user = new \App\User([
             'name' => 'John Smith',
             'email' => 'js1234@messiah.edu',
-            'password' => 'password'
+            'password' => bcrypt('password')
         ]);
         $user->save();
       
         $user = new \App\User([
             'name' => 'Jane Doe',
             'email' => 'jd1234@messiah.edu',
-            'password' => '12345678'
+            'password' => bcrypt('12345678')
         ]);
         $user->save();
     }

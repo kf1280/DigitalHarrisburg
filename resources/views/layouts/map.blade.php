@@ -21,12 +21,17 @@
 
   <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
   
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/css/bootstrap-colorpicker.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/js/bootstrap-colorpicker.js"></script>
   
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-          crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="{{ URL::to('styles/icon.css') }}" />
+  <script src="{{ URL::to('scripts/icon.js') }}"></script>
 
   <title>Digital Harrisburg</title>
   <style>
@@ -48,7 +53,10 @@
 
   <div class="container">
     <div class="header">
-      <h1 class="display-3"> {{$map->title}} </h1> <a href="/maps/{{$map->id}}/edit"><i class="fas fa-edit"></i></a>
+      <h1 class="display-3"> {{$map->title}} </h1> 
+      @if (Auth::check())
+      <a href="/maps/{{$map->id}}/edit"><i class="fas fa-edit"></i></a>
+      @endif
       <h3 class="text-muted"> {{$map->description}} </h3>
       <hr>
     </div>
@@ -58,6 +66,44 @@
       @yield('script')
     </div>
     
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Coordinates</th>
+              @if(Auth::check())
+              <th colspan="2">Controls</th>
+              @endif
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($markers as $marker)
+              <tr>
+                <td> {{$marker->title}} </td>
+                <td> {{$marker->content}} </td>
+                <td> {{$marker->latitude}}, {{$marker->longitude}} </td>
+                @if(Auth::check())
+                <td>
+                  <a href="#" class="edit-marker btn btn-warning" data-id="{{$marker->id}}" data-toggle="modal" data-target="#edit_marker_modal"><i class="fas fa-edit"></i></a>
+                </td>
+                <td>
+                  <form action="/markers/{{$marker->id}}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                </td>
+                @endif
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    @if (Auth::check())
     <div class="row">
       <div class="col">
         <div id="accordion">
@@ -75,7 +121,7 @@
         <form action="/maps/{{$map->id}}/markers" method="post">
           <div class="form-row">
             <div class="form-group col-12">
-              <label for="title">Title:</label>
+              <label for="title">Title</label>
               <input type="text" class="form-control" name="title">
             </div>
           </div>
@@ -89,11 +135,37 @@
           <div class="form-row">
             <div class="form-group col-6">
               <label for="latitude">Latitude</label>
-              <input type="text" class="form-control" name="latitude">
+              <input type="text" class="form-control latitude" name="latitude">
             </div>
             <div class="form-group col-6">
               <label for="longitude">Longitude</label>
-              <input type="text" class="form-control" name="longitude">
+              <input type="text" class="form-control longitude" name="longitude">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="icon">Icon</label>
+              <input type="text" class="form-control" name="icon">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="color">Color</label>
+              <div id="c1" class="input-group colorpicker-component"> 
+                <input type="text" value="#00AABB" class="form-control" name="color" /> <span class="input-group-addon"><i></i></span> 
+              </div> 
+              <script> 
+                $(function() { $('#c1').colorpicker(); }); 
+              </script>
+            </div>
+            <div class="form-group col-6">
+              <label for="color2">Background Color</label>
+              <div id="c2" class="input-group colorpicker-component"> 
+                <input type="text" value="#00AABB" class="form-control" name="color2" /> <span class="input-group-addon"><i></i></span> 
+              </div> 
+              <script> 
+                $(function() { $('#c2').colorpicker(); }); 
+              </script>
             </div>
           </div>
           <div class="form-row">
@@ -130,11 +202,11 @@
           <div class="form-row">
             <div class="form-group col-6">
               <label for="latitude">Latitude</label>
-              <input type="text" class="form-control" name="latitude">
+              <input type="text" class="form-control latitude" name="latitude">
             </div>
             <div class="form-group col-6">
               <label for="longitude">Longitude</label>
-              <input type="text" class="form-control" name="longitude">
+              <input type="text" class="form-control longitude" name="longitude">
             </div>
           </div>
           <div class="form-row">
@@ -176,8 +248,90 @@
 </div>
       </div>
     </div>
-    
+    @endif
   </div>
+  
+  <div class="modal fade" id="edit_marker_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form action="" method="post" id="edit_marker_form">
+          <input type="hidden" name="_method" value="PUT">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="title">Title:</label>
+              <input type="text" class="form-control" name="title" id="edit_marker_title">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="description">Description</label> <br>
+              <textarea name="content" id="edit_marker_content" cols="62" rows="5"></textarea>
+<!--               <script>CKEDITOR.replace( 'edit_marker_content' );</script> -->
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="latitude">Latitude</label>
+              <input type="text" class="form-control" name="latitude" id="edit_marker_latitude">
+            </div>
+            <div class="form-group col-6">
+              <label for="longitude">Longitude</label>
+              <input type="text" class="form-control" name="longitude" id="edit_marker_longitude">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="radius">Radius</label>
+              <input type="text" class="form-control" name="radius" id="edit_circle_radius">
+            </div>
+            <div class="form-group col-6">
+              <label for="color">Color</label>
+              <div id="c3" class="input-group colorpicker-component"> 
+                <input type="text" value="#00AABB" class="form-control" name="color" id="edit_circle_color" /> <span class="input-group-addon"><i></i></span> 
+              </div> 
+              <script> 
+                $(function() { $('#c3').colorpicker(); }); 
+              </script>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="radius">Background Color</label>
+              <div id="c4" class="input-group colorpicker-component"> 
+                <input type="text" value="#00AABB" class="form-control" name="color2" id="edit_color2" /> <span class="input-group-addon"><i></i></span> 
+              </div> 
+              <script> 
+                $(function() { $('#c4').colorpicker(); }); 
+              </script>
+            </div>
+            <div class="form-group col-6">
+              <label for="color">Icon</label>
+              <input type="text" class="form-control" name="icon" id="edit_icon">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <button class="btn btn-outline-primary">Submit</button>
+          </div>
+        </form>
+        
+      </div>
+<!--       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
 
   <footer class="footer">
     @include('partials.footer')
@@ -187,10 +341,39 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/js/bootstrap-colorpicker.js"></script>
+  <script>
+    $(".edit-marker").click(function(e){
+      var id = $(this).data("id");
+      
+      $.getJSON("/markers/" + id + "/edit", function(){
+        console.log("Success!");
+      }).done(function(data){
+        $("#edit_marker_title").val(data.title);
+        $("#edit_marker_content").val(data.content);
+        $("#edit_marker_latitude").val(data.latitude);
+        $("#edit_marker_longitude").val(data.longitude);
+        $("#edit_circle_radius").val(data.radius);
+        $("#edit_circle_color").val(data.color);
+        $("#edit_color2").val(data.color2);
+        $("#edit_icon").val(data.icon);
+        $("#edit_marker_form").attr("action", "/markers/" + id);
+      }).fail(function(){
+        console.log("error");
+      });
+    });
+    
+    map.on("click", function(e){
+      var lat = e.latlng.lat.toString();
+      var lng = e.latlng.lng.toString();
+      $(".latitude").val(lat);
+      $(".longitude").val(lng);
+      
+    });
+  </script>
 </body>
 
 </html>

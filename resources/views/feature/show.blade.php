@@ -33,18 +33,23 @@
     <div class="col-md-12">
       <h2 class="mt-4">Comments</h2>
       <hr>
+      @if ($feature->comments->count() === 0)  
+        <p class="lead text-center">There are no comments to display.</p>
+      @endif  
     </div>
       
+    
       @foreach($feature->comments as $comment)
       <div class="col-md-12 mb-2">
          <div class="card">
           <div class="card-body">
             <p class="card-text h5">
-              {{$comment->user->name}}
+              {{$comment->name}}
               <small class="text-muted">
-                  posted on {{$comment->created_at->format('m/d/Y')}}
+                 ({{$comment->email}}) posted on {{$comment->created_at->format('m/d/Y')}}
               </small>
               
+              @if (Auth::check())
               <a href="#" class="edit-comment text-dark ml-1" data-id="{{$comment->id}}" 
                  data-toggle="modal" data-target="#edit_comment_modal">
                 <small><i class="fas fa-pencil-alt"></i></small>
@@ -53,6 +58,7 @@
                  data-toggle="modal" data-target="#delete_comment_modal">
                 <small><i class="fas fa-times"></i></small>
               </a>
+              @endif
             </p>
             
             <p class="card-text mb-0">{{$comment->content}}</p>
@@ -68,19 +74,31 @@
       </div>
       @endforeach
    
-    <div class="col-md-12 mt-4">
-      <form action="/comment" method="post">
-        <input type="hidden" name="type" id="type" value="App\Feature">
-        <input type="hidden" name="id" id="id" value="{{$feature->id}}">
-        <input type="hidden" name="user" id="user" value="1">
-        <div class="form-group">
-          <label for="content" class="lead">Write a Comment:</label>
-          <textarea class="form-control" name="content" id="content"></textarea>
+  <div class="col-md-12 mt-4">
+    <div class="card">
+      <h5 class="card-header text-center">Write a Comment</h5>
+      <div class="card-body">
+        <form action="/comment" method="post">
+            <input type="hidden" name="type" id="type" value="App\Feature">
+            <input type="hidden" name="id" id="id" value="{{$feature->id}}">
+            <input type="hidden" name="user" id="user" value="1">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" name="name" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="content">Comment:</label>
+              <textarea class="form-control" name="content" id="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-light btn-block">Add Comment</button>
+          </form>
         </div>
-        <button type="submit" class="btn btn-light">Add Comment</button>
-      </form>
+      </div>
     </div>
-
   </div>
 </div>
 
@@ -129,7 +147,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form id="delete_comment_form" action="#" method="post">
           <input type="hidden" name="_method" value="DELETE">
-          <button type="button" class="btn btn-danger">Delete Comment</button>
+          <button type="submit" class="btn btn-danger">Delete Comment</button>
         </form>
       </div>
     </div>

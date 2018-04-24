@@ -17,20 +17,23 @@ Route::get('about', function() {
   return view('about');
 });
 
-Route::get('publish/{id}', [
-  'uses' => 'FeatureController@publish',
-  'as' => 'feature.publish'
-]);
-
 Route::resource('blog', 'BlogController');
 Route::resource('features', 'FeatureController');
 Route::resource('collections', 'CollectionController');
 Route::resource('comment', 'CommentController');
 Route::resource('maps', 'MapController');
 Route::resource('dashboard', 'DashboardController');
+Route::resource('users', 'UserController');
+Route::resource('markers', 'MarkerController');
 
 Route::post('/maps/{id}/markers', 'MapController@storeMarker');
 Route::post('/maps/{id}/circles', 'MapController@storeCircle');
+
+Route::get('/collections/{id}/publish', 'CollectionController@publish');
+Route::get('/maps/{id}/publish', 'MapController@publish');
+Route::get('publish/{id}', 'FeatureController@publish');
+Route::get('reveal/{id}', 'BlogController@reveal');
+Route::get('role/{id}', 'UserController@role');
 
 /*
 |--------------------------------------------------------------------------

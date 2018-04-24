@@ -49,18 +49,19 @@ class MapController extends Controller
     {
       $map = new Map;
       $map->title = $request->input('title');
+      $map->description = $request->input('description');
       $map->latitude = $request->input('latitude');
       $map->longitude = $request->input('longitude');
       $map->collection_id = $request->input('collection');
       $map->content = $request->input('content');
-      $zoom = $request->input('zoom');
-      if($zoom == 0) {
-        $map->zoom = 13;
-      } elseif($zoom == 1) {
-        $map->zoom = 14;
-      } else {
-        $map->zoom = 15;
-      };
+      $map->zoom = $request->input('zoom');
+//       if($zoom == 0) {
+//         $map->zoom = 13;
+//       } elseif($zoom == 1) {
+//         $map->zoom = 14;
+//       } else {
+//         $map->zoom = 15;
+//       };
       $map->layer = $request->input('layer');
       
       
@@ -78,11 +79,11 @@ class MapController extends Controller
     public function show($id)
     {
       $map = Map::find($id);
-      $markers = DB::table('markers')->leftJoin('coordinates', 'markers.id', '=', 'coordinates.marker_id')->where('markers.map_id', '=', $id)->get();
-      $polygons = DB::table('markers')->join('coordinates', 'markers.id', '=', 'coordinates.marker_id')->where('markers.type', '=', 'Polygon')->get();
+      $markers = DB::table('markers')->where('markers.map_id', '=', $id)->get();
+//       $polygons = DB::table('markers')->join('coordinates', 'markers.id', '=', 'coordinates.marker_id')->where('markers.type', '=', 'Polygon')->get();
       //return $polygons;
       
-      return view('map.show')->with('map', $map)->with('markers', $markers)->with('polygons', $polygons);
+      return view('map.show')->with('map', $map)->with('markers', $markers);
     }
 
     /**
@@ -110,18 +111,19 @@ class MapController extends Controller
     {
       $map = Map::find($id);
       $map->title = $request->input('title');
+      $map->description = $request->input('description');
       $map->latitude = $request->input('latitude');
       $map->longitude = $request->input('longitude');
       $map->collection_id = $request->input('collection');
       $map->content = $request->input('content');
-      $zoom = $request->input('zoom');
-      if($zoom == 0) {
-        $map->zoom = 13;
-      } elseif($zoom == 1) {
-        $map->zoom = 14;
-      } else {
-        $map->zoom = 15;
-      };
+      $map->zoom = $request->input('zoom');
+//       if($zoom == 0) {
+//         $map->zoom = 13;
+//       } elseif($zoom == 1) {
+//         $map->zoom = 14;
+//       } else {
+//         $map->zoom = 15;
+//       };
       $map->layer = $request->input('layer');
       
       $map->save();
@@ -149,15 +151,20 @@ class MapController extends Controller
       $marker->content = $request->input('content');
       $marker->type = 'Marker';
       $marker->map_id = $id;
+      $marker->latitude = $request->input('latitude');
+      $marker->longitude = $request->input('longitude');
+      $marker->color = $request->input('color');
+      $marker->color2 = $request->input('color2');
+      $marker->icon = $request->input('icon');
       $marker->save();
       
-      $marker = DB::table('markers')->latest()->first();
+//       $marker = DB::table('markers')->latest()->first();
       
-      $coordinate = new Coordinate;
-      $coordinate->latitude = $request->input('latitude');
-      $coordinate->longitude = $request->input('longitude');
-      $coordinate->marker_id = $marker->id;
-      $coordinate->save();
+//       $coordinate = new Coordinate;
+//       $coordinate->latitude = $request->input('latitude');
+//       $coordinate->longitude = $request->input('longitude');
+//       $coordinate->marker_id = $marker->id;
+//       $coordinate->save();
       
       return redirect('/maps/'.$id);
     }
@@ -171,17 +178,43 @@ class MapController extends Controller
     $marker->map_id = $id;
     $marker->radius = $request->input('radius');
     $marker->color = $request->input('color');
+    $marker->latitude = $request->input('latitude');
+    $marker->longitude = $request->input('longitude');
     $marker->save();
     
-    $marker = DB::table('markers')->latest()->first();
+//     $marker = DB::table('markers')->latest()->first();
     
-    $coordinate = new Coordinate;
-    $coordinate->latitude = $request->input('latitude');
-    $coordinate->longitude = $request->input('longitude');
-    $coordinate->marker_id = $marker->id;
-    $coordinate->save();
+//     $coordinate = new Coordinate;
+//     $coordinate->latitude = $request->input('latitude');
+//     $coordinate->longitude = $request->input('longitude');
+//     $coordinate->marker_id = $marker->id;
+//     $coordinate->save();
     
     return redirect('/maps/'.$id);
+    
+  }
+  
+//   public function deleteMarker($id)
+//   {
+//     $marker = Marker::find($id);
+//     $marker->delete();
+//     return back();
+    
+//   }
+  
+  public function publish($id)
+  {
+    
+    $map = Map::find($id);
+    if($map->published === 'Yes') {
+      $map->published = 'No';
+    } else {
+      $map->published = 'Yes';
+    }
+    
+    $map->save();
+    
+    return back();
     
   }
   

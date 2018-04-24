@@ -17,6 +17,10 @@ class CreateMarkerTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('type');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('radius');
+            $table->string('color');
             $table->timestamps();
             $table->integer('map_id');
         });

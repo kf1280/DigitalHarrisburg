@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Marker;
-use App\Map;
-use DB;
-
-class MarkerController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +27,7 @@ class MarkerController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.register');
     }
 
     /**
@@ -41,7 +38,14 @@ class MarkerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->role = $request->input('role');
+        $user->save();
+      
+        return redirect('/dashboard');
     }
 
     /**
@@ -63,10 +67,7 @@ class MarkerController extends Controller
      */
     public function edit($id)
     {
-        $marker = Marker::find($id);
-        
-      
-        return response()->json($marker);
+        //
     }
 
     /**
@@ -78,19 +79,7 @@ class MarkerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $marker = Marker::find($id);
-        $marker->title = $request->input('title');
-        $marker->content = $request->input('content');
-        $marker->latitude = $request->input('latitude');
-        $marker->longitude = $request->input('longitude');
-        $marker->radius = $request->input('radius');
-        $marker->color = $request->input('color');
-        $marker->color2 = $request->input('color2');
-        $marker->icon = $request->input('icon');
-      
-        $marker->save();
-      
-        return back();
+        //
     }
 
     /**
@@ -101,8 +90,23 @@ class MarkerController extends Controller
      */
     public function destroy($id)
     {
-        $marker = Marker::find($id);
-        $marker->delete();
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/dashboard');
+    }
+  
+    public function role($id)
+    {
+        $user = User::find($id);
+        
+        if ($user->role === 'Admin') {
+          $user->role = 'Contributor';
+        } else {
+          $user->role = 'Admin';
+        }
+        
+        $user->save();
+
         return back();
     }
 }

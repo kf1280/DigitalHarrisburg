@@ -16,23 +16,30 @@
               </div>
             </div>
             <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="subtitle">Subtitle</label>
+                <input type="text" class="form-control" name="description">
+              </div>
+            </div>
+            <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="latitude">Latitude</label>
-                <input type="text" class="form-control" name="latitude">
+                <input type="text" class="form-control" name="latitude" value="40.265642">
               </div>
               <div class="form-group col-md-6">
                 <label for="longitude">Longitude</label>
-                <input type="text" class="form-control" name="longitude">
+                <input type="text" class="form-control" name="longitude" value="-76.885157">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="zoom">Zoom Level</label>
-                <select name="zoom" id="" class="form-control">
+                <input type="number" name="zoom" class="form-control" value="13">
+<!--                 <select name="zoom" id="" class="form-control">
                   <option selected value="0">Far</option>
                   <option value="1">Medium</option>
                   <option value="2">Close</option>
-                </select>
+                </select> -->
               </div>
             </div>
             <div class="form-row">

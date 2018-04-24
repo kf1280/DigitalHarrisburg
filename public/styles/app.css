@@ -13,6 +13,17 @@ body {
   flex-direction: column;
 }
 
+.stage {
+  height: 100%;
+  width: 100%;
+  background: url('https://source.unsplash.com/EJ4qfFp1g8Q/6016x4016') center center no-repeat;
+  background-size: cover;
+}
+
+/* p {
+  letter-spacing: 1px;
+} */
+
 .content {
   flex: 1 0 auto;
 }
