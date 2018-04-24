@@ -165,7 +165,11 @@
         
         <div class="row mt-2">
           <div class="col-9">
+<<<<<<< HEAD
             <div class="blogs-panel">
+=======
+            <div class="features-panel">
+>>>>>>> ef0df78b4d6f76bc470a793cee6a6bd2e438b693
               <div class="card">
                 <div class="card-header">Blogs
                   <div class="float-right"><a href="/blog/create"><i class="fas fa-plus"></i></a></div>

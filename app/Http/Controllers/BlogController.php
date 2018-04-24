@@ -109,14 +109,13 @@ class BlogController extends Controller
             $fileName = time() . "_" . $fileName;
             $destinationPath = public_path().'/images/' ;
             $file->move($destinationPath, $fileName);
-            echo($fileName);
             $blog->image = $fileName;
         }
 
         $blog->published = $request->input('published');
         $blog->save();
       
-        //return redirect('/dashboard');
+        return redirect('/dashboard');
     }
 
     /**

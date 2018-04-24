@@ -25,7 +25,6 @@
                         @endif
                     </div>
                 </div>
-
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label class="col-md-8 offset-md-2 control-label">Password</label>
 
