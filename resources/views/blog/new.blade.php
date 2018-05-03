@@ -22,6 +22,10 @@
               <div class="form-group">
                 <label for="content">Blog Text: </label>
                 <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+                <script>
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+            </script>
               </div>
               <p class="mb-2">Upload Image:</p>
               <div class="custom-file mb-3">

@@ -46,7 +46,7 @@ class FeatureController extends Controller
         $feature->title = $request->input('title');
         $feature->author = $request->input('author');
         $feature->content = $request->input('content');
-      
+        
        if ($file = $request->hasFile('image')) {
             
             $file = $request->file('image') ;
@@ -56,10 +56,12 @@ class FeatureController extends Controller
             $destinationPath = public_path().'/images/' ;
             $file->move($destinationPath, $fileName);
             $feature->image = $fileName;
-        }
+       }
 
         $feature->published = $request->input('published');
         $feature->collection_id = $request->input('collection');
+        $feature->user_id = Auth::user()->id;
+        $feature->last_user = Auth::user()->id;
         $feature->save();
       
         return redirect('/dashboard');
@@ -118,6 +120,7 @@ class FeatureController extends Controller
       
         $feature->published = $request->input('published');
         $feature->collection_id = $request->input('collection');
+        $feature->last_user = Auth::user()->id;
         $feature->save();
       
         return redirect('/dashboard');

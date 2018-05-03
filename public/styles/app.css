@@ -3,6 +3,41 @@ body {
   padding: 0;
 }
 
+.stage {
+  height: 100vh;
+  width: 100%;
+  background: url('https://source.unsplash.com/mpzFnoQCwWU/1600x900') center center no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.stage-caption {
+  font-size: 1.4rem;
+  font-weight: 200;
+  max-width: 60rem;
+  margin: 0 auto;
+  text-align: center;
+  text-shadow: 1px 1px black;
+}
+
+.stage-caption h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.section-dark {
+  height: 100%;
+  width: 100%;
+  background: #343638;
+  background-size: cover;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+
 html, body {
   height: 100%;
   width: 100%;
@@ -12,17 +47,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-.stage {
-  height: 100%;
-  width: 100%;
-  background: url('https://source.unsplash.com/EJ4qfFp1g8Q/6016x4016') center center no-repeat;
-  background-size: cover;
-}
-
-/* p {
-  letter-spacing: 1px;
-} */
 
 .content {
   flex: 1 0 auto;

@@ -25,7 +25,11 @@ class User extends Authenticatable
     ];
   
     public function blogs() {
-        return $this->hasMany('App\Blog');
+        return $this->hasMany('App\Blog', 'id');
+    }
+  
+    public function blogLast() {
+      return $this->hasMany('App\Blog', 'last_user');
     }
   
     public function comments() {
@@ -33,7 +37,11 @@ class User extends Authenticatable
     }
   
     public function features() {
-        return $this->hasMany('App\Feature');
+        return $this->hasMany('App\Feature', 'id');
+    }
+  
+    public function featureLast() {
+      return $this->hasMany('App\Feature', 'last_user');
     }
   
     public function collections() {
@@ -41,7 +49,7 @@ class User extends Authenticatable
     }
   
     public function maps() {
-        return $this->hasMany('App\Map');
+        return $this->hasMany('App\Map', 'id');
     }
   
 }

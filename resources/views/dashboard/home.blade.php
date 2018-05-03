@@ -98,7 +98,7 @@
                   <ul class="list-group">
                     @foreach($maps as $map)
                       <li class="list-group-item">
-                        <a href="/maps/{{$map->id}}">{{$map->title}}</a>
+                        <a href="/maps/{{$map->id}}">{{$map->title}} </a> Created By: {{$map->user->name}}
                         <div class="float-right">
                           <form action="/maps/{{$map->id}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
@@ -137,7 +137,7 @@
                   <ul class="list-group">
                     @foreach($features as $feature)
                       <li class="list-group-item">
-                      <a href="/features/{{$feature->id}}">{{$feature->title}}</a>
+                      <a href="/features/{{$feature->id}}">{{$feature->title}}</a> Created By: {{$feature->user->name}}; Last Edited By: {{$feature->lastUser->name}}
                         <div class="float-right">
                           <form action="/features/{{$feature->id}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
@@ -165,11 +165,7 @@
         
         <div class="row mt-2">
           <div class="col-9">
-<<<<<<< HEAD
             <div class="blogs-panel">
-=======
-            <div class="features-panel">
->>>>>>> ef0df78b4d6f76bc470a793cee6a6bd2e438b693
               <div class="card">
                 <div class="card-header">Blogs
                   <div class="float-right"><a href="/blog/create"><i class="fas fa-plus"></i></a></div>
@@ -178,7 +174,7 @@
                   <ul class="list-group">
                     @foreach($blogs as $blog)
                       <li class="list-group-item">
-                      <a href="\blog\{{$blog->id}}">{{$blog->title}}</a>
+                      <a href="\blog\{{$blog->id}}">{{$blog->title}}</a> Created By: {{$blog->user->name}}; Last Edited By: {{$blog->lastUser->name}}
                         <div class="float-right">
                           <form action="/blog/{{$blog->id}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">

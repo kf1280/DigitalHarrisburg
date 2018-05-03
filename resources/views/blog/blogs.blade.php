@@ -1,7 +1,5 @@
 @extends('layouts.app') @section('title', '- Blogs') @section('content')
 <div class="container">
-
-
   <div class="clearfix">
     
     <div class="row">
@@ -24,14 +22,35 @@
           <div class="side-nav-head">
             <h4>Timeline</h4>
           </div>
+      
+          <div class="accordion">
+            @foreach($archive as $year => $months)
+              @foreach($months as $month => $blogsByMonth)
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{$month}}{{$year}}" aria-expanded="true" aria-controls="collapse{{$month}}{{$year}}">
+                      {{$month}} {{$year}}
+                    </button>
+                  </h5>
+                </div>
 
-          <ul class="list-group list-unstyled margin-bottom-0">
-            <li class="list-group-item"><a href="my-playlists.php">January 2018</a></li>
-            <li class="list-group-item"><a href="account.php">February 2018</a></li>
-          </ul>
-
-        </div>
+                <div id="collapse{{$month}}{{$year}}" class="collapse" aria-labelledby="heading{{$month}}{{$year}}" data-parent="#accordionExample">
+                  <div class="card-body p-0">
          
+                  <ul class="list-group list-group-flush list-unstyled margin-bottom-0">
+                   @foreach($blogsByMonth as $post)
+                    <li class="list-group-item"><a href="\blog\{{$post->id}}">{{$post->title}}</a></li>
+                   @endforeach
+                  </ul>
+                    
+                  </div>
+                </div>
+              </div>
+              @endforeach
+            @endforeach
+          </div>
+      </div> 
       </div>
       <div class="col-md-9">
         <div class="side-custom-content ml-3 mt-0">
@@ -45,10 +64,12 @@
               <a href="\blog\{{$blog->id}}">{{$blog->title}} <span class="text-muted">{{$blog->author}}</span></a>
             </h3>
             <h5>
-              {{$blog->updated_at->format('m/d/Y')}}
+              {{$blog->created_at->format('m/d/Y')}}
             </h5>
-            <h6>
-              {{$blog->content}}
+            <h6 style="overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200ch;">
+              {!! $blog->content !!}
             </h6>
           </div>
           <hr>

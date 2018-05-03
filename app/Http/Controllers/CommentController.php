@@ -40,9 +40,11 @@ class CommentController extends Controller
     {
         $comment = new Comment;
         $comment->content = $request->input('content');
+        $comment->name = $request->input('name');
+        $comment->email = $request->input('email');
         $comment->commentable_type = $request->input('type');
         $comment->commentable_id = $request->input('id');
-        $comment->user_id = $request->input('user');
+//         $comment->user_id = $request->input('user');
         $comment->save();
       
         return back();

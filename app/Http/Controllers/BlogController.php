@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Blog;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class BlogController extends Controller
 {
@@ -17,8 +18,21 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderBy('updated_at', 'desc')->get();
-        return view('blog.blogs')->with('blogs', $blogs);
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $archive = Blog::orderBy('created_at', 'desc')
+        ->whereNotNull('created_at')
+        ->get()
+        ->groupBy(function(Blog $blog) {
+            return $blog->created_at->format('Y');
+        })
+        ->map(function ($item) {
+            return $item
+                ->sortByDesc('created_at')
+                ->groupBy( function ( $item ) {
+                    return $item->created_at->format('F');
+                });
+        });
+        return view('blog.blogs')->with('blogs', $blogs)->with('archive', $archive);
     }
 
     /**
@@ -56,6 +70,8 @@ class BlogController extends Controller
         }
 
         $blog->published = $request->input('published');
+        $blog->user_id = Auth::user()->id;
+        $blog->last_user = Auth::user()->id;
         $blog->save();
       
         return redirect('/dashboard');
@@ -70,8 +86,20 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
-      
-        return view('blog.blog-page')->with('blog', $blog);
+        $archive = Blog::orderBy('created_at', 'desc')
+          ->whereNotNull('created_at')
+          ->get()
+          ->groupBy(function(Blog $blog) {
+              return $blog->created_at->format('Y');
+          })
+          ->map(function ($item) {
+              return $item
+                  ->sortByDesc('created_at')
+                  ->groupBy( function ( $item ) {
+                      return $item->created_at->format('F');
+                  });
+          });
+        return view('blog.blog-page')->with('blog', $blog)->with('archive', $archive);
     }
 
     /**
@@ -113,6 +141,7 @@ class BlogController extends Controller
         }
 
         $blog->published = $request->input('published');
+        $blog->last_user = Auth::user()->id;
         $blog->save();
       
         return redirect('/dashboard');

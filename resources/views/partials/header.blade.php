@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-0">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">Digital Harrisburg</a>
   <form class="form-inline">
