@@ -15,9 +15,8 @@
         <div class="card">
           <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a></div>
           <div class="card-img-top">
-            <img src="..\..\public\images\sample-map.jpg" alt="" class="w-100">
+            <img src="{{URL::to('/images/sample-map.jpg')}}" alt="" class="w-100">
           </div>
-          <div class="card-body"></div>
         </div>
       </div>
       @endif

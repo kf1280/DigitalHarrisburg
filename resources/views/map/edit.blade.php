@@ -48,7 +48,7 @@
                 <label for="collection">Collection</label>
                 <select name="collection" id="" class="form-control">
                   @foreach($collections as $collection)
-                    <option value="{{$collection->id}}"> {{$collection->title}} </option>
+                    <option value="{{$collection->id}}" @if($collection->id == $map->collection_id) selected @endif > {{$collection->title}} </option>
                   @endforeach
                 </select>
               </div>
@@ -65,7 +65,7 @@
                 <label for="layer">Theme</label>
                 <select name="layer" id="" class="form-control">
                   @foreach($layers as $layer)
-                    <option value="{{$layer}}">{{$layer}}</option>
+                    <option value="{{$layer}}" @if($layer == $map->layer) selected @endif >{{$layer}}</option>
                   @endforeach
                 </select>
               </div>

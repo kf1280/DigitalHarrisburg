@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-12 px-0">
        <div class="jumbotron jumbotron-fluid"
-            style="background-image: url('../../public/images/team2.jpg'); 
+            style="background-image: url('{{URL::to('/images/team2.jpg')}}'); 
                    background-size: 100% 100%;
                    min-height: 400px;">
         <div class="container">
@@ -68,7 +68,7 @@
   <div class="row">
     <div class="col-md-12 px-0">
        <div class="jumbotron jumbotron-fluid mb-3"
-            style="background-image: url('../../public/images/team1.jpg'); 
+            style="background-image: url('{{URL::to('/images/team1.jpg')}}'); 
                    background-size: 100% 100%;
                    min-height: 400px;">
       </div>

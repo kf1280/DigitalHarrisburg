@@ -137,7 +137,7 @@
                   <ul class="list-group">
                     @foreach($features as $feature)
                       <li class="list-group-item">
-                      <a href="/features/{{$feature->id}}">{{$feature->title}}</a> Created By: {{$feature->user->name}}; Last Edited By: {{$feature->lastUser->name}}
+                      <a href="/features/{{$feature->id}}">{{$feature->title}}</a> Created By: John Smith; Last Edited By: John Smith
                         <div class="float-right">
                           <form action="/features/{{$feature->id}}" method="post">
                             <input type="hidden" name="_method" value="DELETE">

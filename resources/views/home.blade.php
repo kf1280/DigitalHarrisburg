@@ -32,5 +32,7 @@
   </div>
 </div>
 
+<video src="https://youtu.be/jx96Twg-Aew" loop></video>
+
 
 @endsection

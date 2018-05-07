@@ -34,11 +34,11 @@
       
       options = {
         icon: '{{$marker->icon}}',
-        iconShape: 'marker',
-        iconSize: [40, 40],
+        iconShape: 'circle',
+        iconSize: [30, 30],
         iconAnchor: [21, 20],
-        innerIconAnchor: [0, 8],
-        innerIconStyle: "padding: 1px; font-size: 20px;",
+        innerIconAnchor: [0, 6],
+        innerIconStyle: "padding: 1px; font-size: 16px;",
         borderColor: '{{$marker->color}}',
         textColor: '{{$marker->color}}',
         backgroundColor: '{{$marker->color2}}'
@@ -76,6 +76,7 @@
   
   L.control.layers(baseMaps, overlayMaps).addTo(map);
   
+  @if(Auth::check())
   var popup = L.popup();
 
 function onMapClick(e) {
@@ -86,6 +87,7 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
+  @endif
 
 </script>
 

@@ -60,8 +60,8 @@ class FeatureController extends Controller
 
         $feature->published = $request->input('published');
         $feature->collection_id = $request->input('collection');
-        $feature->user_id = Auth::user()->id;
-        $feature->last_user = Auth::user()->id;
+//         $feature->user_id = Auth::user()->id;
+//         $feature->last_user = Auth::user()->id;
         $feature->save();
       
         return redirect('/dashboard');

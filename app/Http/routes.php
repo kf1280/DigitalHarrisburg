@@ -28,6 +28,7 @@ Route::resource('markers', 'MarkerController');
 
 Route::post('/maps/{id}/markers', 'MapController@storeMarker');
 Route::post('/maps/{id}/circles', 'MapController@storeCircle');
+Route::post('search', 'SearchController@search');
 
 Route::get('/collections/{id}/publish', 'CollectionController@publish');
 Route::get('/maps/{id}/publish', 'MapController@publish');
