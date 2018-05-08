@@ -17,6 +17,7 @@
         <div class="card">
           <div class="card-header">
             <a href="/collections/{{$collection->id}}">{{$collection->title}}</a>
+            
           </div>
           <!--<img src="https://flowersfamilyproject.files.wordpress.com/2014/03/rachel-flowers-in-class-21-e1399262328639.jpg" height="400px" width="60px" alt="" class="card-img-top"> -->
           <div class="card-body"> {{$collection->content}} </div>

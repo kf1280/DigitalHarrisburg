@@ -35,4 +35,13 @@ class DashboardController extends Controller
                                      'users' => $users]);
     }
   
+    public function show() {
+      $collections = Collection::all();
+      $maps = Map::all();
+      return view('dashboard.analytics')->with('collections', $collections)->with('maps', $maps);
+    }
+  
+    
+  
+  
 }

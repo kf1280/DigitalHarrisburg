@@ -13,7 +13,7 @@
       @if($map->published === 'Yes')
         <div class="col-4">
         <div class="card">
-          <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a></div>
+          <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a> <div class="float-right"><i class="fas fa-eye"></i> {{$map->views}}</div> </div>
           <div class="card-img-top">
             <img src="{{URL::to('/images/sample-map.jpg')}}" alt="" class="w-100">
           </div>

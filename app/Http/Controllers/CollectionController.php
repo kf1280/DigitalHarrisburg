@@ -61,6 +61,8 @@ class CollectionController extends Controller
     public function show($id)
     {
         $collection = Collection::find($id);
+        $collection->views = $collection->views + 1;
+        $collection->save();
       
         $features = DB::table('features')->where('collection_id', '=', $id)->get();
         

@@ -12,8 +12,9 @@
       <ul class="nav flex-column list-group mt-5">
         <li class="nav-item mt-1"><a href="#collection-panel" class="nav-link list-group-item"><i class="fas fa-tachometer-alt"></i> Collections</a></li>
         <li class="nav-item"><a href="#maps-panel" class="nav-link list-group-item"><i class="far fa-map"></i> Maps</a></li>
-        <li class="nav-item"><a href="#features-panel" class="nav-link list-group-item"> <i class="fas fa-archive"></i> Exhibits</a></li>
+        <li class="nav-item"><a href="#features-panel" class="nav-link list-group-item"> <i class="fas fa-archive"></i> Features</a></li>
         <li class="nav-item"><a href="#blogs-panel" class="nav-link list-group-item"><i class="far fa-comments"></i> Blogs</a></li>
+        <li class="nav-item"><a href="/dashboard/analytics" class="nav-link list-group-item"><i class="fas fa-chart-area"></i> Analytics</a></li>
       </ul>
     </sidebar>
   </div>
@@ -119,7 +120,7 @@
             <div id="features-panel">
               <div class="card">
                 <div class="card-header">
-                  <a data-toggle="collapse" href="#featureid">Exhibits</a>
+                  <a data-toggle="collapse" href="#featureid">Features</a>
                   <div class="float-right"><a href="/features/create"><i class="fas fa-plus"></i></a></div>
                 </div>
                 <div id="featureid" class="card-body panel-collapse collapse">

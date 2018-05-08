@@ -79,6 +79,8 @@ class MapController extends Controller
     public function show($id)
     {
       $map = Map::find($id);
+      $map->views = $map->views + 1;
+      $map->save();
       $markers = DB::table('markers')->where('markers.map_id', '=', $id)->get();
 //       $polygons = DB::table('markers')->join('coordinates', 'markers.id', '=', 'coordinates.marker_id')->where('markers.type', '=', 'Polygon')->get();
       //return $polygons;

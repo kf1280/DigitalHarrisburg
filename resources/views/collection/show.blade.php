@@ -19,7 +19,7 @@
       @if($map->published === 'Yes')
         <div class="col-4 d-flex align-items-stretch">
         <div class="card mt-2">
-          <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a></div>
+          <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a> <div class="float-right"><i class="fas fa-eye"></i> {{$map->views}}</div> </div>
           <div class="card-img-top">
             <img src="{{URL::to('/images/sample-map.jpg')}}" alt="" class="w-100">
           </div>
@@ -35,7 +35,7 @@
       @if($feature->published === 'Yes')
       <div class="col-4 d-flex align-items-stretch">
         <div class="card mt-2" allign-items="center">
-          <div class="card-header"><a href="/features/{{$feature->id}}">{{$feature->title}}</a></div>
+          <div class="card-header"><a href="/features/{{$feature->id}}">{{$feature->title}}</a> <div class="float-right"><i class="fas fa-eye"></i> {{$feature->views}}</div> </div>
           <div class="card-img-top">
             <img src="{{URL::to('/images/' . $feature->image)}}" alt="" class="w-100">
           </div>

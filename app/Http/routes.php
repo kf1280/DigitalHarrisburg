@@ -23,6 +23,7 @@ Route::resource('collections', 'CollectionController');
 Route::resource('comment', 'CommentController');
 Route::resource('maps', 'MapController');
 Route::resource('dashboard', 'DashboardController');
+Route::get('/dashboard/analytics', 'DashboardController@analytics');
 Route::resource('users', 'UserController');
 Route::resource('markers', 'MarkerController');
 
