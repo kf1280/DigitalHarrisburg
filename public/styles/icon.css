@@ -4,7 +4,10 @@
   (c) 2016-2017, Muhammad Arslan Sajid
   http://leafletjs.com
 */
-
+body {
+  font-family: 'News Cycle';
+  padding: 0;
+}
 
 .beautify-marker {
     text-align: center;
