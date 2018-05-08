@@ -33,9 +33,7 @@
     <div class="col-md-12">
       <h2 class="mt-4">Comments</h2>
       <hr>
-<!--       @if ($feature->comments->isEmpty())  
-        <p class="lead text-center">There are no comments to display.</p>
-      @endif   -->
+      
     </div>
       
     
