@@ -6,16 +6,16 @@
 
 <video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay"></video>
 
-<div class="stage">
-  <div class="stage-caption">
-<!--   <div class="caption"> -->
+<!-- <div class="stage">
+  <div class="stage-caption"> -->
+  <div class="caption">
     <h1 class="display-3">Digital Harrisburg</h1>
     <h2>Explore Pennsylvania's Capitol City</h2>
     <p><a href="/about" class="btn btn-primary">Learn More <i class="fas fa-angle-right"></i> </a></p>
-<!-- </div> -->
-    
-  </div>
 </div>
+    
+<!--   </div>
+</div> -->
 
 <!-- <div class="section-dark">
   <div class="row">
