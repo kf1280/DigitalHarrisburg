@@ -18,7 +18,7 @@
     </sidebar>
   </div>
   
-  <div class="col-7">
+  <div class="col-8">
   
     <section class="dashboard-content">
       
@@ -195,7 +195,7 @@
     </section> 
   
   </div>
- <div class="col-3">
+ <div class="col-2">
     <div id="tools-panel">
       <div class="card tools-card">
         <div class="card-header">Tools</div>
