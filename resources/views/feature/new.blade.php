@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-6 offset-3">
         <div class="card">
-          <div class="card-header">New Feature</div>
+          <div class="card-header">New Exhibit</div>
           <div class="card-body">
             <form action="/features" method="post" enctype="multipart/form-data">
               <div class="form-group">

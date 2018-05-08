@@ -4,6 +4,8 @@
 
 @section('content')
 
+<video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay"></video>
+
 <div class="stage">
   <div class="stage-caption">
     <h1 class="display-3">Digital Harrisburg</h1>
@@ -14,7 +16,7 @@
   </div>
 </div>
 
-<div class="section-dark">
+<!-- <div class="section-dark">
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
@@ -31,8 +33,8 @@
     <div class="col-2"></div>
   </div>
 </div>
+ -->
 
-<video src="https://youtu.be/jx96Twg-Aew" loop></video>
 
 
 @endsection

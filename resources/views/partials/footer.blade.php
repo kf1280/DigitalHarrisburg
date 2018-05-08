@@ -4,12 +4,15 @@
       <a class="navbar-brand" href="{{ url('/dashboard') }}">Digital Harrisburg</a>
     </ul>
     <div class="col-md-4">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search..." aria-label="Searchbar" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+      <form action="/search" method="post">
+        <div class="input-group">
+          <input type="text" class="form-control" name="search" id="searchFooter"
+                 placeholder="Search..." aria-label="Searchbar" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+          <button class="input-group-text btn btn-light" id="basic-addon2"><i class="fas fa-search"></i></button>
         </div>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </nav>

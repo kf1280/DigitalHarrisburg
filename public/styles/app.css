@@ -3,11 +3,21 @@ body {
   padding: 0;
 }
 
+
+#video {
+  position: fixed;
+  min-height: 100%;
+  min-width: 100%;
+}
+
 .stage {
-  height: 100vh;
+  position: fixed;
+  height: 100%;
   width: 100%;
-  background: url('https://source.unsplash.com/mpzFnoQCwWU/1600x900') center center no-repeat;
-  background-size: cover;
+  max-height: 100%;
+  max-width: 100%;
+/*   background: url('https://source.unsplash.com/mpzFnoQCwWU/1600x900') center center no-repeat;
+  background-size: cover; */
   color: white;
   display: flex;
   align-items: center;
@@ -20,6 +30,7 @@ body {
   margin: 0 auto;
   text-align: center;
   text-shadow: 1px 1px black;
+  z-index: 0;
 }
 
 .stage-caption h1 {
@@ -55,4 +66,8 @@ body {
 .footer {
   flex-shrink: 0;
   background-color: #f8f9fa;
+}
+
+.tools-card {
+  margin-top: 3.25em;
 }

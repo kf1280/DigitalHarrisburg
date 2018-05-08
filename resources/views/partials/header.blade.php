@@ -1,14 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-0">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" href="{{ url('/') }}">Digital Harrisburg</a>
-  <form class="form-inline" action="/search" method="post">
-      <div class="input-group">
-        <input type="text" name="search" id="search" class="form-control" placeholder="Search..." aria-label="Searchbar" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="input-group-text btn btn-light" id="basic-addon2"><i class="fas fa-search"></i></button>
-        </div>
-      </div>
-    </form>
     <!-- Toggle Navigation -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,6 +47,16 @@
           </li>
         @endif
       </ul>
+      <div class="col-md-3">
+        <form action="/search" method="post">
+          <div class="input-group">
+            <input type="text" name="search" id="search" class="form-control" placeholder="Search..." aria-label="Searchbar" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="input-group-text btn btn-light" id="basic-addon2"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   

@@ -9,16 +9,16 @@
   <div class="row">
   <div class="col-2">
     <sidebar class="dashboard-navigation sidebar-nav">
-      <ul class="nav flex-column list-group">
-        <li class="nav-item"><a href="#collection-panel" class="nav-link list-group-item"><i class="fas fa-tachometer-alt"></i> Collections</a></li>
+      <ul class="nav flex-column list-group mt-5">
+        <li class="nav-item mt-1"><a href="#collection-panel" class="nav-link list-group-item"><i class="fas fa-tachometer-alt"></i> Collections</a></li>
         <li class="nav-item"><a href="#maps-panel" class="nav-link list-group-item"><i class="far fa-map"></i> Maps</a></li>
-        <li class="nav-item"><a href="#features-panel" class="nav-link list-group-item"> <i class="fas fa-archive"></i> Features</a></li>
+        <li class="nav-item"><a href="#features-panel" class="nav-link list-group-item"> <i class="fas fa-archive"></i> Exhibits</a></li>
         <li class="nav-item"><a href="#blogs-panel" class="nav-link list-group-item"><i class="far fa-comments"></i> Blogs</a></li>
       </ul>
     </sidebar>
   </div>
   
-  <div class="col-10">
+  <div class="col-7">
   
     <section class="dashboard-content">
       
@@ -30,15 +30,16 @@
       <section class="dashboard-inner">
       
         <div class="row">
-          <div class="col-9">
+          <div class="col-12">
             <div id="collection-panel">
               <div class="card">
-                <div class="card-header">Collections
+                <div class="card-header">
+                  <a data-toggle="collapse" href="#collectionid">Collections</a>
                   <div class="float-right">
                     <a href="/collections/create"><i class="fas fa-plus ml-auto"></i></a>
                   </div>
                 </div>
-                <div class="card-body">
+                <div id="collectionid" class="card-body panel-collapse collapse">
                   <ul class="list-group">
                     @foreach($collections as $collection)
                       <li class="list-group-item"> 
@@ -69,32 +70,19 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
-            <div id="tools-panel">
-              <div class="card">
-                <div class="card-header">Tools</div>
-                <div class="card-body">
-                  @if(Auth::check() and Auth::user()->role == 'Admin')
-                  <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fas fa-users"></i> Manage Users
-                  </button>
-                  @endif
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         
         <div class="row mt-2">
-          <div class="col-9">
-            <div class="maps-panel">
+          <div class="col-12">
+            <div id="maps-panel">
               <div class="card">
-                <div class="card-header">Maps
+                <div class="card-header">
+                  <a data-toggle="collapse" href="#mapid">Maps</a>
                   <div class="float-right">
                     <a href="/maps/create"><i class="fas fa-plus"></i></a>
                   </div>
                 </div>
-                <div class="card-body">
+                <div id="mapid" class="card-body panel-collapse collapse">
                   <ul class="list-group">
                     @foreach($maps as $map)
                       <li class="list-group-item">
@@ -127,13 +115,14 @@
         </div>
         
         <div class="row mt-2">
-          <div class="col-9">
-            <div class="features-panel">
+          <div class="col-12">
+            <div id="features-panel">
               <div class="card">
-                <div class="card-header">Features
+                <div class="card-header">
+                  <a data-toggle="collapse" href="#featureid">Exhibits</a>
                   <div class="float-right"><a href="/features/create"><i class="fas fa-plus"></i></a></div>
                 </div>
-                <div class="card-body">
+                <div id="featureid" class="card-body panel-collapse collapse">
                   <ul class="list-group">
                     @foreach($features as $feature)
                       <li class="list-group-item">
@@ -164,13 +153,14 @@
         </div>
         
         <div class="row mt-2">
-          <div class="col-9">
-            <div class="blogs-panel">
+          <div class="col-12">
+            <div id="blogs-panel">
               <div class="card">
-                <div class="card-header">Blogs
+                <div class="card-header">
+                  <a data-toggle="collapse" href="#blogid">Blogs</a>
                   <div class="float-right"><a href="/blog/create"><i class="fas fa-plus"></i></a></div>
                 </div>
-                <div class="card-body">
+                <div id="blogid" class="card-body panel-collapse collapse">
                   <ul class="list-group">
                     @foreach($blogs as $blog)
                       <li class="list-group-item">
@@ -205,7 +195,20 @@
     </section> 
   
   </div>
-  
+ <div class="col-3">
+    <div id="tools-panel">
+      <div class="card tools-card">
+        <div class="card-header">Tools</div>
+        <div class="card-body">
+          @if(Auth::check() and Auth::user()->role == 'Admin')
+          <button type="button" class="btn btn-block btn-light" data-toggle="modal" data-target="#exampleModal">
+            <i class="fas fa-users"></i> Manage Users
+          </button>
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
   
   <!-- Start Manage Users Modal -->

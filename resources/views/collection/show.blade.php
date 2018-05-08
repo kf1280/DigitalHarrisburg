@@ -17,7 +17,7 @@
   <div class="row" id="maps">
     @foreach($maps as $map)
       @if($map->published === 'Yes')
-        <div class="col-4">
+        <div class="col-4 d-flex align-items-stretch">
         <div class="card mt-2">
           <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a></div>
           <div class="card-img-top">
@@ -33,7 +33,7 @@
   <div class="row" id="features">
     @foreach($features as $feature)
       @if($feature->published === 'Yes')
-      <div class="col-4">
+      <div class="col-4 d-flex align-items-stretch">
         <div class="card mt-2" allign-items="center">
           <div class="card-header"><a href="/features/{{$feature->id}}">{{$feature->title}}</a></div>
           <div class="card-img-top">

@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-6 offset-3">
         <div class="card">
-          <div class="card-header">Edit Feature</div>
+          <div class="card-header">Edit Exhibit</div>
           <div class="card-body">
             <form action="/features/{{$feature->id}}" method="post">
               <input type="hidden" name="_method" value="PUT">

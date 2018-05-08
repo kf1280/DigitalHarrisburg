@@ -22,7 +22,7 @@
               <div class="card mt-2">
                 <div class="card-header"><a href="/collections/{{$collection->id}}">{{$collection->title}}</a></div>
                 <div class="card-img-top">
-                  <img src="..\..\public\images\placeholder.png" alt="" class="w-100">
+                  <img src="{{URL::to('/images/placeholder.png')}}" alt="" class="w-100">
                 </div>
               </div>
             </div>
@@ -42,7 +42,7 @@
           <div class="card mt-2">
             <div class="card-header"><a href="/maps/{{$map->id}}">{{$map->title}}</a></div>
             <div class="card-img-top">
-              <img src="..\..\public\images\sample-map.jpg" alt="" class="w-100">
+              <img src="{{URL::to('/images/sample-map.jpg')}}" alt="" class="w-100">
             </div>
           </div>
         </div>

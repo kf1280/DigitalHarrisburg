@@ -61,11 +61,11 @@
           @if($blog->published === "Yes")          
           <div class="container">
             <h3 class="font-weight-bold">
-              <a href="\blog\{{$blog->id}}">{{$blog->title}} <span class="text-muted">{{$blog->author}}</span></a>
-            </h3>
-            <h5>
+              <a href="\blog\{{$blog->id}}">{{$blog->title}}</a></h3>
+            <h4><span class="text-muted">{{$blog->author}}</span></h4>
+            <h6>
               {{$blog->created_at->format('m/d/Y')}}
-            </h5>
+            </h6>
             <h6 style="overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200ch;">
