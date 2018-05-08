@@ -4,7 +4,7 @@
 
 @section('content')
 
-  <div class="stage-caption">
+  <div class="stage-caption pull-right">
     <h1 class="display-3">Digital Harrisburg</h1>
     <h2>Explore Pennsylvania's Capitol City</h1>
     <p>
