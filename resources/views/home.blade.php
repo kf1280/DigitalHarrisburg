@@ -4,7 +4,7 @@
 
 @section('content')
 
-<video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay"></video>
+<video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay" muted></video>
 
 <div class="stage">
   <div class="stage-caption">
