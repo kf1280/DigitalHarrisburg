@@ -4,10 +4,10 @@
 
 @section('content')
 
-<video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay"></video>
 
 <!-- <div class="stage"> -->
   <div class="caption">
+    <video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay"></video>
     <h1 class="display-3">Digital Harrisburg</h1>
     <h2>Explore Pennsylvania's Capitol City</h1>
     <p>
