@@ -4,7 +4,6 @@
 
 @section('content')
 
-<div class="stage">
   <div class="stage-caption">
     <h1 class="display-3">Digital Harrisburg</h1>
     <h2>Explore Pennsylvania's Capitol City</h1>
@@ -13,7 +12,6 @@
       </p>
   </div>
   <video src="{{URL::to('people2.mp4')}}" loop id="video" autoplay="autoplay"></video>
-</div>
 
 <!-- <div class="section-dark">
   <div class="row">
