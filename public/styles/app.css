@@ -4,81 +4,39 @@ body {
 }
 
 
-/* #video {
+#video {
+    position: fixed;
 
-  z-index: -5;
-} */
+}
 
-/* .stage {
+.stage {
+  
+/*    background: url('https://source.unsplash.com/mpzFnoQCwWU/1600x900') center center no-repeat; */
+  
+}
+
+.stage-caption {
   position: fixed;
   height: 100%;
   width: 100%;
   max-height: 100%;
   max-width: 100%;
-/*    background: url('https://source.unsplash.com/mpzFnoQCwWU/1600x900') center center no-repeat;
-  background-size: cover; 
+  font-size: 1.4rem;
+  font-weight: 200;
+  max-width: 60rem;
+  margin: 0 auto;
+  text-align: center;
+  text-shadow: 1px 1px black;
+  z-index: 1;
+  background-size: cover;
   color: white;
   display: flex;
   align-items: center;
 }
-*/
-.v-text {
-  font-size: 1.4rem !important;
-  font-weight: 200 !important;
-  max-width: 60rem !important;
-  margin: 0 auto !important;
-  text-align: center !important;
-  text-shadow: 1px 1px black !important;
-  z-index: 0 !important;
-  color: white !important;
-  display: flex !important;
-  align-items: center !important;
-}
 
-.v-text h1 {
-  font-weight: bold !important;
-  text-transform: uppercase !important;
-}
-/*
-.caption {
-    position: fixed;
-  min-height: 100%;
-  min-width: 100%;
-  z-index: 5;
-  background: rgba(0, 0, 0, 0);
-position: absolute;
-top: 12%;
-right: 0;
-bottom: 0;
-left: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center; 
-} */
-
-.v-overlay {
-  position: absolute !important;
-  width: 100% !important;
-}
-
-.v-text {
-  width: 100% !important;
-  height: calc(100vh - 80px) !important;
-  min-height: 600px !important;
-  object-fit: cover !important;
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-video {
-  position: absolute !important;
-  top: 0 !important;
-  z-index: -1 !important;
-  width: 100% !important;
-  height: calc(100vh - 80px) !important;
-  min-height: 600px !important;
-  object-fit: cover !important;
+.stage-caption h1 {
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .section-dark {
