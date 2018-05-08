@@ -76,8 +76,9 @@ class FeatureController extends Controller
     public function show($id)
     {
         $feature = Feature::find($id);
+        $comments = Comment::where('commentable_type', 'App\Feature')->where('commentable_id', $id)->get();
       
-        return view('feature.show')->with('feature', $feature);
+        return view('feature.show')->with('feature', $feature)->with('comments', $comments);
     }
 
     /**
